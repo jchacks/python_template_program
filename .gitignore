@@ -1,0 +1,10 @@
+# Exclude IDE settings
+.vscode/
+
+__pycache__/
+
+# exclude secret files
+secret.env
+
+# exclude data directories
+data/

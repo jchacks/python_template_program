@@ -1,0 +1,12 @@
+name: myproject
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6
+  - dotenv
+  - numpy
+  - pandas
+  - requests
+  - pip
+  - pip:
+    - some-pip-dependency
