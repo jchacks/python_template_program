@@ -9,7 +9,6 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 load_dotenv(f"{PROJECT_ROOT}/.env", verbose=True)
 load_dotenv(f"{PROJECT_ROOT}/secret.env", verbose=True)
 
-
 #! Put any env vars loaded from dot env here
 
 
