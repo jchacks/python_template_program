@@ -1,7 +1,7 @@
 # Default Python Project
 
-If you are building an application use the `src` folder.
-There is a separate structure for building modules. (setup.py etc...) 
+If you know what you are doing delete this README and replace with your project else read on.
+If you are building an application using a `src` folder then this is suitable for you. Otherwise there is a separate structure for building modules. (setup.py etc...) and you need a slightly different setup.
 
 ## Getting started
 
@@ -12,7 +12,6 @@ There is a separate structure for building modules. (setup.py etc...)
 ➜ cd project-name
 ➜ git remote remove origin
 ```
-
 
 ### Environment
 
@@ -105,7 +104,6 @@ from config import make_logger
 from some_module import useful_func
 
 logger = make_logger()
-
 
 
 if __name__ == '__main__':
