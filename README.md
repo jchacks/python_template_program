@@ -1,7 +1,10 @@
 # Default Python Project
 
 If you know what you are doing delete this README and replace with your project else read on.
-If you are building an application using a `src` folder then this is suitable for you. Otherwise there is a separate structure for building modules. (setup.py etc...) and you need a slightly different setup.
+If you are building an application using a `src` folder then this is suitable for you. 
+Otherwise there is a separate structure for building packages. (setup.py etc...) and you need a slightly different setup.
+
+Inspiration is taken from the [Hitchhiker's Guide to Python - Structuring Your Project](https://docs.python-guide.org/writing/structure/).
 
 ## Getting started
 
@@ -15,7 +18,7 @@ If you are building an application using a `src` folder then this is suitable fo
 
 ### Environment
 
-Recently I converted to (mini)conda for managing my python environments.  The long and short of it is that it combines the goodness of pyenv with pip and venv all in one.  If you are used to `requirements.txt` then `environment.yml` is your new friend.  Take a look at the snippet below:
+Use (mini)conda for managing python environments it combines the goodness of pyenv with pip and venv all in one.  If you are used to `requirements.txt` then [`environment.yml`](environment.yml) is your new friend.  Take a look at the snippet below:
 
 ```yaml
 # environment.yml
@@ -35,20 +38,20 @@ dependencies:
     - some-pip-dependency # <- 4) add pip only dependencies here
 ```
 
-This is `environment.yml` file that is included by default, you wil need to edit it a little:
+This is `environment.yml` file that is included by default, you will need to edit it a little:
   1) Choose a name for your environment and replace it
   2) Edit it to contain your desired python version for example `python=3.8`
-  3) Add any dependancies available on conda
-  4) If the dependancy is not available on conda you will need to add pip as a dependancy and then the pip packages below 
+  3) Add any dependencies available on conda
+  4) If the dependency is not available on conda you will need to add pip as a dependency and then the pip packages below 
 
 
 ### Default Python code
 
-Included is a default `config.py` file that I find myself using on all my projects.
+Included is a default [`config.py`]() file that solves a lot of issues commonly encountered in python projects.
 
 #### Environment Variables
 
-In my projects I often have variables that are "secret" and those that are configurable during a project and are better stored in an `.env` file.
+Projects often contain "secret" variables or variables that need to be easily configurable during a project.  These are better stored in `.env` files than in python source code.
 This code snippet shows how to load these variables and set them as global variables inside the python module.
 
 ```python
@@ -83,9 +86,10 @@ print('Shhhh 🤫 this is my key', API_KEY)
 
 #### Unimportant Logging Detour
 
-The other parts of the `config.py` file are to do with logging.  For progress bars in python I use the `tqdm` package.  However normal logging/printing do not play nicely with tqdm.  In order to smooth out the kinks I redirect the logging output through the `tqdm.write` method and package it up nicely in a logging handler `TqdmLoggingHandler`.  Is used by default in the `make_logger` function.  All that you need to worry about is using the `make_logger` function.
+The other parts of the [`config.py`](src/config.py) file are to do with logging.  The `tqdm` package offers some great progress bars that are handy for monitoring longer running tasks.  However, normal logging and printing do not play nicely with tqdm.  To fix this it is required that logging output is redirected through the `tqdm.write` method.  The [`TqdmLoggingHandler`](src/config.py#L15)  logging handler is used by default in the `make_logger` function and solves these issues.
 
-When using logging in a module that should not be run it is good to define loggers like `logger = logging.getLogger(__name__)`.
+When using the python `logging` module inside your own module you should declare your logger using `logging.getLogger(__name__)`.  This automatically records the module name making it easier to track down errors.
+
 ```python
 # some_module 
 import logging
@@ -97,7 +101,7 @@ def useful_func(arg):
 
 ```
 
-and then in a main program that is expected to be invoked `python3 some_program.py` you create the root logger using `make_logger`.
+and then in the 'main' program that is expected to be invoked you would create the root logger using `make_logger` from `config`.
 ```python
 # some_program
 from config import make_logger
@@ -132,3 +136,8 @@ There are a few settings suggested for ease of development using VSCode.
 
 * The `"python.pythonPath"` setting should be set to the default python interpreter that you want to use for this project.  If you have a custom environment.yml for conda that defines an environment replace it with the path to that python. e.g. myproject above.
 * Setting `terminal.integrated.env.linux` to be the `./src` directory enables linting and running of python code to find any modules stored in that directory.  Especially useful if you have any sibling modules that need importing.
+
+
+### Footnote
+
+All of the statements above are my opinion on a good starting point for Python projects and is open to discussion.
