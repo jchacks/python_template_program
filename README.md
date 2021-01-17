@@ -86,7 +86,7 @@ print('Shhhh 🤫 this is my key', API_KEY)
 
 #### Unimportant Logging Detour
 
-The other parts of the [`config.py`](src/config.py) file are to do with logging.  The `tqdm` package offers some great progress bars that are handy for monitoring longer running tasks.  However, normal logging and printing do not play nicely with tqdm.  To fix this it is required that logging output is redirected through the `tqdm.write` method.  The [`TqdmLoggingHandler`](src/config.py#L15)  logging handler is used by default in the `make_logger` function and solves these issues.
+The other parts of the [`config.py`](src/config.py) file are to do with logging.  The `tqdm` package offers some great progress bars that are handy for monitoring longer running tasks.  However, normal logging and printing do not play nicely with tqdm.  To fix this it is required that logging output is redirected through the `tqdm.write` method.  The [`TqdmLoggingHandler`](src/config.py#L15)  logging handler is used by default in the [`make_logger.py`](src/config.py#L27) function and solves these issues.
 
 When using the python `logging` module inside your own module you should declare your logger using `logging.getLogger(__name__)`.  This automatically records the module name making it easier to track down errors.
 
@@ -140,4 +140,4 @@ There are a few settings suggested for ease of development using VSCode.
 
 ### Footnote
 
-All of the statements above are my opinion on a good starting point for Python projects and is open to discussion.
+All of the statements above are my opinion and are open to discussion.  This project was only meant as a good starting point for Python projects and not the one and only way to do things.
